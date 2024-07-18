@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('banco_cuenta_tipo_id')->unsigned();
             $table->foreign('banco_cuenta_tipo_id')->references('id')->on('banco_cuenta_tipos');
             $table->integer('numero_cuenta');
-            $table->integer('retencion_extra');
+            $table->integer('retencion_extra')->nullable();
             $table->timestamps();
         });
     }
