@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('moneda_valors', function (Blueprint $table) {
+        Schema::create('dotacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('moneda_id')->unsigned();
-            $table->foreign('moneda_id')->references('id')->on('monedas');
-            $table->date('fecha');
-            $table->decimal('valor',10,3);
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('moneda_valors');
+        Schema::dropIfExists('dotacions');
     }
 };

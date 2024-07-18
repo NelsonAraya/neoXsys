@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MonedaResource\Pages;
-use App\Filament\Resources\MonedaResource\RelationManagers;
-use App\Models\Moneda;
+use App\Filament\Resources\PrevisionResource\Pages;
+use App\Filament\Resources\PrevisionResource\RelationManagers;
+use App\Models\Prevision;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,12 +12,11 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Validation\Rule;
 
-class MonedaResource extends Resource
+class PrevisionResource extends Resource
 {
-    protected static ?string $model = Moneda::class;
-    protected static ?string $navigationGroup ='Finanzas Mantenedor';
+    protected static ?string $model = Prevision::class;
+    protected static ?string $navigationGroup ='RRHH Mantenedor';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -28,19 +27,9 @@ class MonedaResource extends Resource
                 ->required()
                 ->maxLength(255)
                 ->autocomplete('off')
-                ->afterStateUpdated(function ($state, $set) { //guardo la primera del texto completo
-                    $set('nombre', ucwords(strtolower($state)));
+                ->afterStateUpdated(function ($state, $set) { //guardo la primera en mayuscula
+                    $set('nombre', ucfirst($state));
                 }),
-                Forms\Components\TextInput::make('codigo')
-                ->required()
-                ->autocomplete('off')
-                ->afterStateUpdated(function ($state, $set) { 
-                    $set('codigo', strtoupper($state));
-                })
-                ->rules([
-                    'required',
-                    Rule::unique('monedas', 'codigo')->ignore(request()->route('record')), 
-                ]),
             ]);
     }
 
@@ -50,8 +39,6 @@ class MonedaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('nombre')
-                ->searchable(),
-                Tables\Columns\TextColumn::make('codigo')
                 ->searchable(),
             ])
             ->filters([
@@ -70,16 +57,16 @@ class MonedaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\MonedaValorRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMonedas::route('/'),
-            'create' => Pages\CreateMoneda::route('/create'),
-            'edit' => Pages\EditMoneda::route('/{record}/edit'),
+            'index' => Pages\ListPrevisions::route('/'),
+            'create' => Pages\CreatePrevision::route('/create'),
+            'edit' => Pages\EditPrevision::route('/{record}/edit'),
         ];
     }
 }
