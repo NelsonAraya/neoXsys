@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AfpResource extends Resource
 {
     protected static ?string $model = Afp::class;
-    protected static ?string $navigationGroup ='RRHH';
+    protected static ?string $navigationGroup ='RRHH Mantenedor';
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
     public static function form(Form $form): Form

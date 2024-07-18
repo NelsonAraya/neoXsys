@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BancoResource\Pages;
-use App\Filament\Resources\BancoResource\RelationManagers;
-use App\Models\Banco;
+use App\Filament\Resources\BancoCuentaTipoResource\Pages;
+use App\Filament\Resources\BancoCuentaTipoResource\RelationManagers;
+use App\Models\BancoCuentaTipo;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,23 +13,24 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BancoResource extends Resource
+class BancoCuentaTipoResource extends Resource
 {
-    protected static ?string $model = Banco::class;
+    protected static ?string $model = BancoCuentaTipo::class;
     protected static ?string $navigationGroup ='Finanzas Mantenedor';
-    protected static ?string $navigationIcon = 'heroicon-o-building-library';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nombre')
+                ->label('Nombre Tipo Cuenta')
                 ->required()
                 ->maxLength(255)
                 ->autocomplete('off')
-                ->afterStateUpdated(function ($state, $set) { //guardo la primera del texto completo
+                ->afterStateUpdated(function ($state, $set) { 
                     $set('nombre', ucwords(strtolower($state)));
-                }),
+                })
             ]);
     }
 
@@ -64,9 +65,9 @@ class BancoResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBancos::route('/'),
-            'create' => Pages\CreateBanco::route('/create'),
-            'edit' => Pages\EditBanco::route('/{record}/edit'),
+            'index' => Pages\ListBancoCuentaTipos::route('/'),
+            'create' => Pages\CreateBancoCuentaTipo::route('/create'),
+            'edit' => Pages\EditBancoCuentaTipo::route('/{record}/edit'),
         ];
     }
 }

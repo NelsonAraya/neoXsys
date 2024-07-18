@@ -17,7 +17,7 @@ use Illuminate\Validation\Rule;
 class CuentaPresupuestariaResource extends Resource
 {
     protected static ?string $model = CuentaPresupuestaria::class;
-    protected static ?string $navigationGroup ='Finanzas';
+    protected static ?string $navigationGroup ='Finanzas Mantenedor';
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
     public static function form(Form $form): Form

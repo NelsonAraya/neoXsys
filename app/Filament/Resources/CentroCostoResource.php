@@ -17,7 +17,7 @@ use Illuminate\Validation\Rule;
 class CentroCostoResource extends Resource
 {
     protected static ?string $model = CentroCosto::class;
-    protected static ?string $navigationGroup ='Finanzas';
+    protected static ?string $navigationGroup ='Finanzas Mantenedor';
     protected static ?string $navigationIcon = 'heroicon-c-scale';
 
     public static function form(Form $form): Form
